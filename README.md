@@ -45,7 +45,9 @@ A Python-based real-time speech translation system that captures audio input, tr
 
 ## How to Run
 - In a terminal run `python main.py` and a GUI will pop up
-- Select the language you want to speak and the language you want outputed
-- Select if you want to enable audio translation
-- Hit confirm
-- You can change languages and if translated audio is outputed by simply clicking confirm with your updated settings
+- Select your input language
+- Select target translation language
+- Enable/disable translated audio output
+- Choose test mode if needed
+- Start translation by clicking "Confirm"
+- You can change any setting and it will update once you hit "Confirm" again
