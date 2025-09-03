@@ -14,10 +14,10 @@ GUI interface for easy language selection and configuration
 
 <H2>System Requirements<H2>
 
-Python 3.8+
+<par>Python 3.8+
 CUDA-capable GPU with minimum 6GB Memory
 Microphone and camera
-Virtual camera software support
+Virtual camera software support<par>
 
 <H2>Setup<H2>
 
