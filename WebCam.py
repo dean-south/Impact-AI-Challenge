@@ -14,6 +14,7 @@ class WebCame:
 
         self.stop = False
 
+
     def start(self):
         self.stop = False
         print("Starting video stream...")
@@ -45,6 +46,7 @@ class WebCame:
                 self.stream.release()
                 cv2.destroyAllWindows()
                 break
+
 
     def stop_stream(self):
         self.stop = True

@@ -70,10 +70,7 @@ class VirtualCamera:
                 if frame.shape[:2] != (self.height, self.width):
                     frame = cv2.resize(frame, (self.width, self.height))
                 
-                
                 text = self.memory.read_buffer_subtitle()
-
-                # print(f"Overlay text: {text}")
 
                 if text:
                     frame = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
@@ -84,7 +81,6 @@ class VirtualCamera:
                     draw.text((self.width//2, self.height-100), text, anchor="ms", font_size=40, font=font)
 
                     frame = np.asarray(pil_image)
-                    # frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
 
 
                 # Send to virtual camera

@@ -30,6 +30,7 @@ class InputAudio:
         self.stream_thread = threading.Thread(target=self.update, args=(), daemon=True)
         self.stream_thread.start()
 
+
     def stop_stream(self):
         # Clean up resources
         self.stop = True
@@ -37,9 +38,8 @@ class InputAudio:
         self.input_stream.close()
         self.p.terminate()
 
+
     def update(self):
         while not self.stop:        
             self.data = self.input_stream.read(self.CHUNK)
             self.memory.add_input_audio(np.frombuffer(self.data, dtype=np.float32))
-
-

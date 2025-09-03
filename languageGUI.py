@@ -14,7 +14,6 @@ class LanguageGUI:
     def __init__(self):
         self.result = None
         self.setup_gui()
-
         self.root.mainloop()
     
 
@@ -81,6 +80,7 @@ class LanguageGUI:
 
         self.shutdown_btn = tk.Button(self.root, text='Shutdown', command=self.on_shutdown_system)
         self.shutdown_btn.pack(pady=10)
+
     
     def get_selections(self):
         """Show GUI and return the selected values when confirmed"""
@@ -92,7 +92,6 @@ class LanguageGUI:
         self.memory = AsyncMemory(30)
         self.audio_in = InputAudio(memory=self.memory)
         device_idx = 3 if test_mode else 6
-        print(f'{device_idx=}')
         self.audio_out = OutputAudio(self.audio_in, memory=self.memory, translated_audio=use_trans_audio, device_idx=device_idx)
         self.video_stream = WebCame(src=0, memory=self.memory) if test_mode else VirtualCamera(memory=self.memory)
         # summariser = TextSummarizer()
@@ -109,6 +108,7 @@ class LanguageGUI:
 
         self.system_start = True
 
+
     def on_shutdown_system(self):
         if self.system_start:
             self.audio_in.stop_stream()
@@ -118,6 +118,7 @@ class LanguageGUI:
             self.video_stream.stop_stream()
 
         self.root.destroy()
+
     
     def reset_system(self, input_lang, trans_lang, output_lang, test_mode=False, use_trans_audio=True):
         self.audio_in.stop_stream()
@@ -129,7 +130,6 @@ class LanguageGUI:
         self.memory = AsyncMemory(30)
         self.audio_in = InputAudio(memory=self.memory)
         device_idx = 3 if test_mode else 6
-        print(f'{device_idx=}')
         self.audio_out = OutputAudio(self.audio_in, memory=self.memory, translated_audio=use_trans_audio, device_idx=device_idx)
         self.video_stream = WebCame(src=0, memory=self.memory) if test_mode else VirtualCamera(memory=self.memory)
         # summariser = TextSummarizer()
@@ -168,4 +168,3 @@ class LanguageGUI:
                               output_lang=lang_out,
                               test_mode=test_mode,
                               use_trans_audio=use_trans_audio)
-        

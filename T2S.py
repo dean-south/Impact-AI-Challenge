@@ -20,7 +20,8 @@ class T2S:
         self.model.eval()
 
         self.stop = False
-        
+
+
     @torch.no_grad()
     def synthesize_speech(self):
         while not self.stop:
@@ -29,7 +30,6 @@ class T2S:
                 text = self.memory.read_buffer_t2s()
 
                 if text and not (text == '' or text == ' '):
-                    # print(f"TTS input text: {text}")
                     # Generate speech
                     inputs = self.tokenizer(text, return_tensors="pt").to(self.device)
                     output = self.model(**inputs)

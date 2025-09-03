@@ -44,6 +44,7 @@ class T2TT:
             verbose=False
         )
     
+    
     def translate(self, text: str, source_language: str, target_language: str) -> str:
         """
         Translate text from source language to target language

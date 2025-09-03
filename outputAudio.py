@@ -16,14 +16,13 @@ class OutputAudio:
         self.memory = memory
         self.translated_audio = translated_audio
 
-        print(f'{self.CHANNELS=}')
 
         # Open output stream (speakers)
         self.output_stream = self.p.open(format=self.FORMAT,
                                          channels=self.CHANNELS,
                                          rate=self.RATE,
                                          output=True,
-                                        #  input=True,
+                                          input=True,
                                          frames_per_buffer=self.CHUNK,
                                          output_device_index=device_idx)
         
@@ -32,7 +31,6 @@ class OutputAudio:
         while not self.stop:
             audio_data = self.memory.get_output_audio() if self.translated_audio is not None else self.input_audio.data
 
-            # print(f"Output audio chunk size: {len(audio_data)}")
             if audio_data is not None:
                 if self.translated_audio:
                     audio_data = (audio_data * 32767).astype(np.int16).tobytes()
@@ -44,15 +42,12 @@ class OutputAudio:
             
             time.sleep(0.01)
 
-    
-    # def use_translated_audio(self, use_trans_audio):
-    #     self.translated_audio = use_trans_audio
-
 
     def start(self):
         self.stop = False
         print("Starting audio output stream...")
         threading.Thread(target=self.play_audio, args=(), daemon=True).start()
+
 
     def stop_stream(self):
         # Clean up resources

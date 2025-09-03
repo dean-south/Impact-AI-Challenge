@@ -8,6 +8,7 @@ from typing import Optional
 from langchain.chains import TransformChain
 from translator import T2TT
 
+
 class S2TT:
     def __init__(self, memory, in_lang: str = 'spanish', out_lang: str = 'english'):
         
@@ -56,6 +57,7 @@ class S2TT:
 
         print("Model and LangChain ready!")
 
+
     def setup_langchain(self):
         """Setup LangChain components for post-processing"""
         
@@ -77,6 +79,7 @@ class S2TT:
             output_variables=['cleaned_text'],
             transform=clean_text
         )
+
 
     def _preprocess_audio(self, input_audio: np.ndarray) -> Optional[np.ndarray]:
         """Preprocess audio and check for silence"""
@@ -100,10 +103,11 @@ class S2TT:
             
         return audio_array
 
+
     @torch.no_grad()
     def transcribe_translate(self):
         while not self.stop:
-            # # Rate limiting
+            # Rate limiting
             current_time = time.time()
             time.sleep(1)
                 
@@ -136,9 +140,6 @@ class S2TT:
                 gc.collect()
             
             self.memory.add_to_history(transcription, True)
-            
-            print(f"Transcription: {transcription}")
-
 
             if self.in_lang == self.out_lang:
                 translation = transcription
@@ -146,12 +147,11 @@ class S2TT:
                 translation = ''
             else:
                 translation = self.T2TT.translate(transcription, self.in_lang, self.out_lang)
-
-            print(f"Translation: {translation}")
             
             self.memory.add_to_history(translation, False)
             self.memory.write_buffer(translation)
-            
+
+
     def start(self):
         self.stop = False
         print("Starting transcription thread...")
@@ -164,7 +164,6 @@ class S2TT:
         self.out_lang = out_lang
 
 
-    
     def stop_s2tt(self):
         self.stop = True
 
@@ -172,5 +171,4 @@ class S2TT:
     def __del__(self):
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
-            gc.collect()    
-
+            gc.collect()
