@@ -22,8 +22,8 @@ A Python-based real-time speech translation system that captures audio input, tr
 ## Setup
 
 ### Dependencies
-'pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu[Enter Cuda Version, e.g.129]'
-'pip install whisper' 
+`pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu[Enter Cuda Version, e.g.129]`
+`pip install whisper`
 pip install transformers  
 pip install langchain langchain-google-genai  
 pip install pyaudio  
