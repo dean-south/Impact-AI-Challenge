@@ -51,3 +51,16 @@ A Python-based real-time speech translation system that captures audio input, tr
 - Choose test mode if needed
 - Start translation by clicking "Confirm"
 - You can change any setting and it will update once you hit "Confirm" again
+
+## Current Supported Languages
+- English
+- German
+- Norwegian (No Audio Support)
+- French 
+- Italian (No Audio Support)
+- Swedish
+- Hebrew
+- Mandarin (No Audio Support)
+- Malay
+- Indonesian
+- Spanish
