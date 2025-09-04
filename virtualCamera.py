@@ -81,7 +81,7 @@ class VirtualCamera:
                     draw.text((self.width//2, self.height-100), text, anchor="ms", font_size=40, font=font)
 
                     frame = np.asarray(pil_image)
-
+    
 
                 # Send to virtual camera
                 self.camera.send(frame)

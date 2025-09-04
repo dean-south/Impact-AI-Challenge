@@ -30,10 +30,6 @@ class S2TT:
 
         self.memory = memory
         
-        # Buffer setup
-        self.last_transcription_time = time.time()
-        self.prev_transcription = ""
-        
         # Memory management
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
@@ -53,7 +49,7 @@ class S2TT:
         
         self.model.eval()
 
-        self.T2TT = T2TT()
+        self.t2tt = T2TT()
 
         print("Model and LangChain ready!")
 
@@ -146,7 +142,7 @@ class S2TT:
             elif transcription == '':
                 translation = ''
             else:
-                translation = self.T2TT.translate(transcription, self.in_lang, self.out_lang)
+                translation = self.t2tt.translate(transcription, self.in_lang, self.out_lang)
             
             self.memory.add_to_history(translation, False)
             self.memory.write_buffer(translation)

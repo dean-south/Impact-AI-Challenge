@@ -5,10 +5,9 @@ import numpy as np
 from PIL import ImageFont, ImageDraw, Image
 
 
-class WebCame:
+class WebCam:
     def __init__(self, memory, src=0):
         self.stream = cv2.VideoCapture(src)
-        (self.grabbed, self.frame) = self.stream.read()
 
         self.memory = memory
 

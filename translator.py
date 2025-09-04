@@ -4,6 +4,7 @@ from langchain.prompts import PromptTemplate
 from langchain.chains import LLMChain
 from typing import Optional
 
+
 class T2TT:
     def __init__(self, api_key: Optional[str] = None):
         """
@@ -14,6 +15,8 @@ class T2TT:
         """
         if api_key:
             os.environ["GOOGLE_API_KEY"] = api_key
+
+
         
         # Initialize the Google Generative AI model (free tier)
         self.llm = ChatGoogleGenerativeAI(

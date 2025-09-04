@@ -5,9 +5,9 @@ import numpy as np
 
 
 class OutputAudio:
-    def __init__(self, input_audio, memory, translated_audio=True, device_idx=20):
+    def __init__(self, input_audio, memory, translated_audio=True, device_id=20):
         self.CHUNK = 1024
-        self.FORMAT = pyaudio.paInt16
+        self.FORMAT = pyaudio.paInt16 if translated_audio else pyaudio.paFloat32
         self.CHANNELS = 1
         self.RATE = 16000
         self.input_audio = input_audio
@@ -15,6 +15,7 @@ class OutputAudio:
         self.p = pyaudio.PyAudio()
         self.memory = memory
         self.translated_audio = translated_audio
+        self.device_id = device_id
 
 
         # Open output stream (speakers)
@@ -24,12 +25,12 @@ class OutputAudio:
                                          output=True,
                                           input=True,
                                          frames_per_buffer=self.CHUNK,
-                                         output_device_index=device_idx)
+                                         output_device_index=self.device_id)
         
 
     def play_audio(self):
         while not self.stop:
-            audio_data = self.memory.get_output_audio() if self.translated_audio is not None else self.input_audio.data
+            audio_data = self.memory.get_output_audio() if self.translated_audio else self.input_audio.data
 
             if audio_data is not None:
                 if self.translated_audio:
@@ -41,6 +42,10 @@ class OutputAudio:
                     self.output_stream.write(chunk)
             
             time.sleep(0.01)
+        
+        self.output_stream.stop_stream()
+        self.output_stream.close()
+        self.p.terminate()
 
 
     def start(self):
@@ -52,6 +57,7 @@ class OutputAudio:
     def stop_stream(self):
         # Clean up resources
         self.stop = True
-        self.output_stream.stop_stream()
-        self.output_stream.close()
-        self.p.terminate()
+
+
+    
+        

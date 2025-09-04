@@ -51,13 +51,3 @@ class T2S:
 
     def stop_t2s(self):
         self.stop = True
-
-
-    def cleanup(self):
-        """Cleanup resources."""
-        if hasattr(self, 'model'):
-            del self.model
-        if hasattr(self, 'tokenizer'):
-            del self.tokenizer
-        torch.cuda.empty_cache()
-        gc.collect()
